@@ -17,39 +17,20 @@
  *
  */
 
-package co.pauloza.slack.domain;
+package co.paulozan.slack.contract;
 
-
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import java.util.Map;
-import lombok.Data;
+import co.pauloza.slack.domain.HealthCheck;
+import com.netflix.hystrix.HystrixCommand;
+import feign.Headers;
+import feign.RequestLine;
 
 /**
  * Created by pzanco on 11/06/17.
  */
+public interface API {
 
-@Data
-public class HealthCheck {
-
-  private Boolean ok;
-  private String error;
-  private Arguments args;
-
-  @Data
-  @JsonInclude(Include.NON_NULL)
-  @JsonRootName(value = "args")
-  class Arguments {
-
-    private Map<String, String> properties;
-
-    @JsonAnyGetter
-    public Map<String, String> getProperties() {
-      return properties;
-    }
-
-  }
+  @RequestLine("GET /api/api.test")
+  @Headers("Content-Type: application/x-www-form-urlencoded")
+  HystrixCommand<HealthCheck> test();
 
 }

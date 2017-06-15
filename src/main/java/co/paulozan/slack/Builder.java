@@ -17,39 +17,21 @@
  *
  */
 
-package co.pauloza.slack.domain;
+package co.paulozan.slack;
 
-
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import java.util.Map;
-import lombok.Data;
+import co.paulozan.slack.contract.SlackConstants;
+import feign.hystrix.HystrixFeign;
+import feign.jackson.JacksonDecoder;
 
 /**
- * Created by pzanco on 11/06/17.
+ * Created by pzanco on 15/06/17.
  */
+public class Builder {
 
-@Data
-public class HealthCheck {
-
-  private Boolean ok;
-  private String error;
-  private Arguments args;
-
-  @Data
-  @JsonInclude(Include.NON_NULL)
-  @JsonRootName(value = "args")
-  class Arguments {
-
-    private Map<String, String> properties;
-
-    @JsonAnyGetter
-    public Map<String, String> getProperties() {
-      return properties;
-    }
-
+  public static Object instance(Class t) {
+    return HystrixFeign.builder()
+        .decoder(new JacksonDecoder())
+        .target(t, SlackConstants.SLACK_URL);
   }
 
 }

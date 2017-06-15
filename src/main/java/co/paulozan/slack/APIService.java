@@ -17,39 +17,25 @@
  *
  */
 
-package co.pauloza.slack.domain;
+package co.paulozan.slack;
 
-
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import java.util.Map;
-import lombok.Data;
+import co.pauloza.slack.domain.HealthCheck;
+import co.paulozan.slack.contract.API;
+import rx.Observable;
 
 /**
- * Created by pzanco on 11/06/17.
+ * Created by pzanco on 15/06/17.
  */
+public final class APIService {
 
-@Data
-public class HealthCheck {
+  private static final API api = (API) Builder.instance(API.class);
 
-  private Boolean ok;
-  private String error;
-  private Arguments args;
+  private APIService() {
+  }
 
-  @Data
-  @JsonInclude(Include.NON_NULL)
-  @JsonRootName(value = "args")
-  class Arguments {
-
-    private Map<String, String> properties;
-
-    @JsonAnyGetter
-    public Map<String, String> getProperties() {
-      return properties;
-    }
-
+  public static HealthCheck test() throws Exception {
+    Observable<HealthCheck> observable = api.test().toObservable();
+    return observable.toBlocking().single();
   }
 
 }

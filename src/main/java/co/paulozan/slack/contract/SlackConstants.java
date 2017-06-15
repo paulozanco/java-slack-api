@@ -17,39 +17,13 @@
  *
  */
 
-package co.pauloza.slack.domain;
-
-
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import java.util.Map;
-import lombok.Data;
+package co.paulozan.slack.contract;
 
 /**
- * Created by pzanco on 11/06/17.
+ * Created by pzanco on 15/06/17.
  */
+public class SlackConstants {
 
-@Data
-public class HealthCheck {
-
-  private Boolean ok;
-  private String error;
-  private Arguments args;
-
-  @Data
-  @JsonInclude(Include.NON_NULL)
-  @JsonRootName(value = "args")
-  class Arguments {
-
-    private Map<String, String> properties;
-
-    @JsonAnyGetter
-    public Map<String, String> getProperties() {
-      return properties;
-    }
-
-  }
+  public static final String SLACK_URL = "https://slack.com";
 
 }
