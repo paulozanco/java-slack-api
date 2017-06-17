@@ -28,17 +28,17 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-/**
- * Response
- *  {
- *    "ok": true,
- *    "url": "https:\/\/myteam.slack.com\/",
- *    "team": "My Team",
- *    "user": "cal",
- *    "team_id": "T12345",
- *    "user_id": "U12345"
- *  }
- */
+/*
+ Response
+ {
+   "ok": true,
+   "url": "https:\/\/myteam.slack.com\/",
+   "team": "My Team",
+   "user": "cal",
+   "team_id": "T12345",
+   "user_id": "U12345"
+ }
+*/
 @Data
 @JsonInclude(Include.NON_NULL)
 public class AuthenticationCheck{

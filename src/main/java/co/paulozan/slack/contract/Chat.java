@@ -19,7 +19,7 @@
 
 package co.paulozan.slack.contract;
 
-import co.paulozan.slack.domain.Channel;
+import co.paulozan.slack.domain.ChatResponse;
 import com.netflix.hystrix.HystrixCommand;
 import feign.Param;
 import feign.RequestLine;
@@ -30,7 +30,7 @@ import feign.RequestLine;
 public interface Chat {
 
   @RequestLine("POST /api/chat.postMessage?token={token}&channel={channel}&text={text}")
-  HystrixCommand<Channel> postMessage(@Param("token") String token
+  HystrixCommand<ChatResponse> postMessage(@Param("token") String token
       ,@Param("channel") String channel
       ,@Param("text") String text);
 

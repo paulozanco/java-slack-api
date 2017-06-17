@@ -23,29 +23,30 @@ package co.paulozan.slack.domain;
  * Created by pzanco on 17/06/17.
  */
 
-import co.paulozan.slack.event.Message;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-/**
- * Response
- *  {
- *    "ok": true,
- *    "ts": "1405895017.000506",
- *    "channel": "C024BE91L",
- *    "message": {
- *                ...
- *                }
- *  }
- */
+/*
+ {
+ "id": "T654321",
+ "name": "Librarian Society of Soledad",
+ "domain": "libsocos",
+ "enterprise_id": "E234567",
+ "enterprise_name": "Intercontinental Librarian Society"
+ }
+*/
 @Data
 @JsonInclude(Include.NON_NULL)
-public class Channel {
+public class Team {
 
-  private Boolean ok;
-  private String ts;
-  private String channel;
-  private Message message;
+  private String id;
+  private String name;
+  private String domain;
+  @JsonProperty("enterprise_id")
+  private String enterpriseId;
+  @JsonProperty("enterprise_name")
+  private String enterpriseName;
 
 }

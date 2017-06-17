@@ -17,25 +17,27 @@
  *
  */
 
-package co.paulozan.slack;
-
-import co.paulozan.slack.domain.ChatResponse;
-import rx.Observable;
+package co.paulozan.slack.domain;
 
 /**
- * Created by pzanco on 15/06/17.
+ * Created by pzanco on 17/06/17.
  */
-public final class ChatService {
 
-  private static final co.paulozan.slack.contract.Chat chat = (co.paulozan.slack.contract.Chat) Builder.instance(
-      co.paulozan.slack.contract.Chat.class);
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import lombok.Data;
 
-  private ChatService() {
+/*
+  {
+    "id": "W123456",
+    "name": "brautigan"
   }
+*/
+@Data
+@JsonInclude(Include.NON_NULL)
+public class Self {
 
-  public static ChatResponse postMessage(String token, String channel, String text) throws Exception {
-    Observable<ChatResponse> observable = chat.postMessage(token, channel, text).toObservable();
-    return observable.toBlocking().single();
-  }
+  private String id;
+  private String name;
 
 }

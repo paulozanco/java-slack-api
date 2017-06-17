@@ -19,22 +19,22 @@
 
 package co.paulozan.slack;
 
-import co.paulozan.slack.domain.ChatResponse;
+import co.paulozan.slack.contract.RTM;
+import co.paulozan.slack.domain.RTMResponse;
 import rx.Observable;
 
 /**
  * Created by pzanco on 15/06/17.
  */
-public final class ChatService {
+public final class RTMService {
 
-  private static final co.paulozan.slack.contract.Chat chat = (co.paulozan.slack.contract.Chat) Builder.instance(
-      co.paulozan.slack.contract.Chat.class);
+  private static final RTM rtm = (RTM) Builder.instance(RTM.class);
 
-  private ChatService() {
+  private RTMService() {
   }
 
-  public static ChatResponse postMessage(String token, String channel, String text) throws Exception {
-    Observable<ChatResponse> observable = chat.postMessage(token, channel, text).toObservable();
+  public static RTMResponse connect(String token) throws Exception {
+    Observable<RTMResponse> observable = rtm.connect(token).toObservable();
     return observable.toBlocking().single();
   }
 

@@ -17,25 +17,19 @@
  *
  */
 
-package co.paulozan.slack;
+package co.paulozan.slack.contract;
 
-import co.paulozan.slack.domain.ChatResponse;
-import rx.Observable;
+import co.paulozan.slack.domain.RTMResponse;
+import com.netflix.hystrix.HystrixCommand;
+import feign.Param;
+import feign.RequestLine;
 
 /**
- * Created by pzanco on 15/06/17.
+ * Created by pzanco on 11/06/17.
  */
-public final class ChatService {
+public interface RTM {
 
-  private static final co.paulozan.slack.contract.Chat chat = (co.paulozan.slack.contract.Chat) Builder.instance(
-      co.paulozan.slack.contract.Chat.class);
-
-  private ChatService() {
-  }
-
-  public static ChatResponse postMessage(String token, String channel, String text) throws Exception {
-    Observable<ChatResponse> observable = chat.postMessage(token, channel, text).toObservable();
-    return observable.toBlocking().single();
-  }
+  @RequestLine("POST /api/rtm.connect?token={token}")
+  HystrixCommand<RTMResponse> connect(@Param("token") String token);
 
 }
