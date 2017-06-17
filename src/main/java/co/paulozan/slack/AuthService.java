@@ -19,26 +19,25 @@
 
 package co.paulozan.slack;
 
-import co.paulozan.slack.contract.SlackConstants;
-import feign.Logger;
-import feign.Logger.Level;
-import feign.hystrix.HystrixFeign;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
-import feign.slf4j.Slf4jLogger;
+import co.pauloza.slack.domain.AuthenticationCheck;
+import co.pauloza.slack.domain.HealthCheck;
+import co.paulozan.slack.contract.API;
+import co.paulozan.slack.contract.Auth;
+import rx.Observable;
 
 /**
  * Created by pzanco on 15/06/17.
  */
-public class Builder {
+public final class AuthService {
 
-  public static Object instance(Class t) {
-    return HystrixFeign.builder()
-        .logger(new Slf4jLogger())
-        .logLevel(Level.FULL)
-        .decoder(new JacksonDecoder())
-//        .encoder(new JacksonEncoder())
-        .target(t, SlackConstants.SLACK_URL);
+  private static final Auth auth = (Auth) Builder.instance(Auth.class);
+
+  private AuthService() {
+  }
+
+  public static AuthenticationCheck test(String token) throws Exception {
+    Observable<AuthenticationCheck> observable = auth.test(token).toObservable();
+    return observable.toBlocking().single();
   }
 
 }

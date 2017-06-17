@@ -17,28 +17,19 @@
  *
  */
 
-package co.paulozan.slack;
+import co.pauloza.slack.domain.AuthenticationCheck;
+import co.paulozan.slack.AuthService;
 
-import co.paulozan.slack.contract.SlackConstants;
-import feign.Logger;
-import feign.Logger.Level;
-import feign.hystrix.HystrixFeign;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
-import feign.slf4j.Slf4jLogger;
+public class App {
 
-/**
- * Created by pzanco on 15/06/17.
- */
-public class Builder {
-
-  public static Object instance(Class t) {
-    return HystrixFeign.builder()
-        .logger(new Slf4jLogger())
-        .logLevel(Level.FULL)
-        .decoder(new JacksonDecoder())
-//        .encoder(new JacksonEncoder())
-        .target(t, SlackConstants.SLACK_URL);
+  public static void main(String[] args) {
+    try {
+      final String token = "xoxp-195954571956-196729082679-197976938273-ababae008773a740a88327d7a15c2e6f";
+      AuthenticationCheck authenticationCheck = AuthService.test(token);
+      System.out.println("args = [" + authenticationCheck + "]");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
 }

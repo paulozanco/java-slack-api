@@ -17,28 +17,39 @@
  *
  */
 
-package co.paulozan.slack;
-
-import co.paulozan.slack.contract.SlackConstants;
-import feign.Logger;
-import feign.Logger.Level;
-import feign.hystrix.HystrixFeign;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
-import feign.slf4j.Slf4jLogger;
+package co.pauloza.slack.domain;
 
 /**
- * Created by pzanco on 15/06/17.
+ * Created by pzanco on 17/06/17.
  */
-public class Builder {
 
-  public static Object instance(Class t) {
-    return HystrixFeign.builder()
-        .logger(new Slf4jLogger())
-        .logLevel(Level.FULL)
-        .decoder(new JacksonDecoder())
-//        .encoder(new JacksonEncoder())
-        .target(t, SlackConstants.SLACK_URL);
-  }
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+
+/**
+ * Response
+ *  {
+ *    "ok": true,
+ *    "url": "https:\/\/myteam.slack.com\/",
+ *    "team": "My Team",
+ *    "user": "cal",
+ *    "team_id": "T12345",
+ *    "user_id": "U12345"
+ *  }
+ */
+@Data
+@JsonInclude(Include.NON_NULL)
+public class AuthenticationCheck{
+
+  private Boolean ok;
+  private String url;
+  private String team;
+  private String user;
+  @JsonProperty(value = "team_id")
+  private String teamId;
+  @JsonProperty(value = "user_id")
+  private String userId;
 
 }

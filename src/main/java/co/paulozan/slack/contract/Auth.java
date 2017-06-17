@@ -17,19 +17,23 @@
  *
  */
 
-package co.paulozan.slack;
+package co.paulozan.slack.contract;
 
-import co.pauloza.slack.domain.HealthCheck;
+import co.pauloza.slack.domain.AuthenticationCheck;
+import com.netflix.hystrix.HystrixCommand;
+import feign.Body;
+import feign.Headers;
+import feign.Param;
+import feign.RequestLine;
+import javax.ws.rs.HEAD;
+import javax.ws.rs.PathParam;
 
-public class App {
+/**
+ * Created by pzanco on 11/06/17.
+ */
+public interface Auth {
 
-  public static void main(String[] args) {
-    try {
-      HealthCheck healthCheck = APIService.test();
-      System.out.println("args = [" + healthCheck + "]");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+  @RequestLine("POST /api/auth.test?token={token}")
+  HystrixCommand<AuthenticationCheck> test(@Param("token") String token);
 
 }

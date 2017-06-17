@@ -29,8 +29,12 @@ import feign.RequestLine;
  */
 public interface API {
 
+  /**
+   * This method helps you test your calling code.
+   *
+   * @return HealthCheck : The response includes any supplied arguments
+   */
   @RequestLine("GET /api/api.test")
-  @Headers("Content-Type: application/x-www-form-urlencoded")
   HystrixCommand<HealthCheck> test();
 
 }

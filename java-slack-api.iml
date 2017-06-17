@@ -24,6 +24,8 @@
     <orderEntry type="library" name="Maven: com.netflix.hystrix:hystrix-core:1.4.26" level="project" />
     <orderEntry type="library" name="Maven: io.reactivex:rxjava:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-slf4j:9.5.0" level="project" />
+    <orderEntry type="library" name="Maven: io.github.openfeign:feign-jaxrs:9.5.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.ws.rs:jsr311-api:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: io.github.openfeign:feign-jackson:9.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.16" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.8" level="project" />
