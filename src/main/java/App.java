@@ -24,7 +24,7 @@ public class App {
 
   public static void main(String[] args) {
     try {
-      final String token = "xoxp-195954571956-196729082679-197976938273-ababae008773a740a88327d7a15c2e6f";
+      final String token = "<<<token goes here>>>";
       AuthenticationCheck authenticationCheck = AuthService.test(token);
       System.out.println("args = [" + authenticationCheck + "]");
     } catch (Exception e) {
