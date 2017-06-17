@@ -19,14 +19,10 @@
 
 package co.paulozan.slack.contract;
 
-import co.pauloza.slack.domain.AuthenticationCheck;
+import co.paulozan.slack.domain.AuthenticationCheck;
 import com.netflix.hystrix.HystrixCommand;
-import feign.Body;
-import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
-import javax.ws.rs.HEAD;
-import javax.ws.rs.PathParam;
 
 /**
  * Created by pzanco on 11/06/17.

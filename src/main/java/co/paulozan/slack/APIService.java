@@ -19,7 +19,7 @@
 
 package co.paulozan.slack;
 
-import co.pauloza.slack.domain.HealthCheck;
+import co.paulozan.slack.domain.HealthCheck;
 import co.paulozan.slack.contract.API;
 import rx.Observable;
 

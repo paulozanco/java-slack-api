@@ -17,25 +17,21 @@
  *
  */
 
-package co.paulozan.slack;
+package co.paulozan.slack.contract;
 
-import co.paulozan.slack.contract.SlackConstants;
-import feign.Logger.Level;
-import feign.hystrix.HystrixFeign;
-import feign.jackson.JacksonDecoder;
-import feign.slf4j.Slf4jLogger;
+import co.paulozan.slack.domain.Channel;
+import com.netflix.hystrix.HystrixCommand;
+import feign.Param;
+import feign.RequestLine;
 
 /**
- * Created by pzanco on 15/06/17.
+ * Created by pzanco on 11/06/17.
  */
-public class Builder {
+public interface Chat {
 
-  public static Object instance(Class t) {
-    return HystrixFeign.builder()
-        .logger(new Slf4jLogger())
-        .logLevel(Level.FULL)
-        .decoder(new JacksonDecoder())
-        .target(t, SlackConstants.SLACK_URL);
-  }
+  @RequestLine("POST /api/chat.postMessage?token={token}&channel={channel}&text={text}")
+  HystrixCommand<Channel> postMessage(@Param("token") String token
+      ,@Param("channel") String channel
+      ,@Param("text") String text);
 
 }

@@ -19,9 +19,8 @@
 
 package co.paulozan.slack.contract;
 
-import co.pauloza.slack.domain.HealthCheck;
+import co.paulozan.slack.domain.HealthCheck;
 import com.netflix.hystrix.HystrixCommand;
-import feign.Headers;
 import feign.RequestLine;
 
 /**

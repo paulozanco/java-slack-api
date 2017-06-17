@@ -19,9 +19,7 @@
 
 package co.paulozan.slack;
 
-import co.pauloza.slack.domain.AuthenticationCheck;
-import co.pauloza.slack.domain.HealthCheck;
-import co.paulozan.slack.contract.API;
+import co.paulozan.slack.domain.AuthenticationCheck;
 import co.paulozan.slack.contract.Auth;
 import rx.Observable;
 

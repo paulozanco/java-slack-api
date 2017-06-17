@@ -17,7 +17,7 @@
  *
  */
 
-package co.pauloza.slack.domain;
+package co.paulozan.slack.event;
 
 /**
  * Created by pzanco on 17/06/17.
@@ -28,28 +28,18 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-/**
- * Response
- *  {
- *    "ok": true,
- *    "url": "https:\/\/myteam.slack.com\/",
- *    "team": "My Team",
- *    "user": "cal",
- *    "team_id": "T12345",
- *    "user_id": "U12345"
- *  }
- */
 @Data
 @JsonInclude(Include.NON_NULL)
-public class AuthenticationCheck{
+public class Message {
 
-  private Boolean ok;
-  private String url;
-  private String team;
-  private String user;
-  @JsonProperty(value = "team_id")
-  private String teamId;
-  @JsonProperty(value = "user_id")
-  private String userId;
+  private String type;
+  private String subtype;
+  private String username;
+
+  @JsonProperty("bot_id")
+  private String botId;
+
+  private String text;
+  private String ts;
 
 }

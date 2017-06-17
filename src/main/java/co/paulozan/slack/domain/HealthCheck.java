@@ -17,7 +17,7 @@
  *
  */
 
-package co.pauloza.slack.domain;
+package co.paulozan.slack.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;

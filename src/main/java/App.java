@@ -17,7 +17,7 @@
  *
  */
 
-import co.pauloza.slack.domain.AuthenticationCheck;
+import co.paulozan.slack.domain.AuthenticationCheck;
 import co.paulozan.slack.AuthService;
 
 public class App {
