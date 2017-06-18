@@ -25,31 +25,19 @@ package co.paulozan.slack.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /*
- Response
  {
-   "ok": true,
-   "url": "https:\/\/myteam.slack.com\/",
-   "team": "My Team",
-   "user": "cal",
-   "team_id": "T12345",
-   "user_id": "U12345"
+    "user": "U2147483697",
+    "ts": "1355517536.000001"
  }
 */
 @Data
 @JsonInclude(Include.NON_NULL)
-public class AuthenticationCheck {
+public class Edited {
 
-  private Boolean ok;
-  private String url;
-  private String team;
   private String user;
-  @JsonProperty(value = "team_id")
-  private String teamId;
-  @JsonProperty(value = "user_id")
-  private String userId;
+  private String ts;
 
 }

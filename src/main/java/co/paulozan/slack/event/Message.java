@@ -23,6 +23,8 @@ package co.paulozan.slack.event;
  * Created by pzanco on 17/06/17.
  */
 
+import co.paulozan.slack.domain.Edited;
+import co.paulozan.slack.domain.Icons;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,13 +35,17 @@ import lombok.Data;
 public class Message {
 
   private String type;
-  private String subtype;
-  private String username;
-
-  @JsonProperty("bot_id")
-  private String botId;
-
+  private String channel;
+  private String user;
   private String text;
   private String ts;
+  private Edited edited;
+  private Icons icons;
+
+  private String subtype;
+  @JsonProperty("bot_id")
+  private String botId;
+  private String username;
+
 
 }

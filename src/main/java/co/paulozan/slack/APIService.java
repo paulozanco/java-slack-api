@@ -19,8 +19,8 @@
 
 package co.paulozan.slack;
 
-import co.paulozan.slack.domain.HealthCheck;
 import co.paulozan.slack.contract.API;
+import co.paulozan.slack.domain.HealthCheck;
 import rx.Observable;
 
 /**

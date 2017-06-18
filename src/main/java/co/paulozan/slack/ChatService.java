@@ -27,13 +27,15 @@ import rx.Observable;
  */
 public final class ChatService {
 
-  private static final co.paulozan.slack.contract.Chat chat = (co.paulozan.slack.contract.Chat) Builder.instance(
-      co.paulozan.slack.contract.Chat.class);
+  private static final co.paulozan.slack.contract.Chat chat = (co.paulozan.slack.contract.Chat) Builder
+      .instance(
+          co.paulozan.slack.contract.Chat.class);
 
   private ChatService() {
   }
 
-  public static ChatResponse postMessage(String token, String channel, String text) throws Exception {
+  public static ChatResponse postMessage(String token, String channel, String text)
+      throws Exception {
     Observable<ChatResponse> observable = chat.postMessage(token, channel, text).toObservable();
     return observable.toBlocking().single();
   }

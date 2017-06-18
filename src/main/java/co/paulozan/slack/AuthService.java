@@ -19,8 +19,8 @@
 
 package co.paulozan.slack;
 
-import co.paulozan.slack.domain.AuthenticationCheck;
 import co.paulozan.slack.contract.Auth;
+import co.paulozan.slack.domain.AuthenticationCheck;
 import rx.Observable;
 
 /**

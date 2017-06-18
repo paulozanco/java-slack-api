@@ -20,11 +20,6 @@
 package co.paulozan.slack.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import java.util.Map;
 import lombok.Data;
 
 /**
@@ -38,18 +33,5 @@ public class HealthCheck {
   private String error;
   private Arguments args;
 
-  @Data
-  @JsonInclude(Include.NON_NULL)
-  @JsonRootName(value = "args")
-  class Arguments {
-
-    private Map<String, String> properties;
-
-    @JsonAnyGetter
-    public Map<String, String> getProperties() {
-      return properties;
-    }
-
-  }
 
 }

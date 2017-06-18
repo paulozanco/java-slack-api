@@ -31,7 +31,7 @@ public interface Chat {
 
   @RequestLine("POST /api/chat.postMessage?token={token}&channel={channel}&text={text}")
   HystrixCommand<ChatResponse> postMessage(@Param("token") String token
-      ,@Param("channel") String channel
-      ,@Param("text") String text);
+      , @Param("channel") String channel
+      , @Param("text") String text);
 
 }

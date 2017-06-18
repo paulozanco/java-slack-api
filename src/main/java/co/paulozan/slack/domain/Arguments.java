@@ -19,37 +19,26 @@
 
 package co.paulozan.slack.domain;
 
-/**
- * Created by pzanco on 17/06/17.
- */
-
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import java.util.Map;
 import lombok.Data;
 
-/*
- Response
- {
-   "ok": true,
-   "url": "https:\/\/myteam.slack.com\/",
-   "team": "My Team",
-   "user": "cal",
-   "team_id": "T12345",
-   "user_id": "U12345"
- }
-*/
+/**
+ * Created by pzanco on 18/06/17.
+ */
 @Data
 @JsonInclude(Include.NON_NULL)
-public class AuthenticationCheck {
+@JsonRootName(value = "args")
+public class Arguments {
 
-  private Boolean ok;
-  private String url;
-  private String team;
-  private String user;
-  @JsonProperty(value = "team_id")
-  private String teamId;
-  @JsonProperty(value = "user_id")
-  private String userId;
+  private Map<String, String> properties;
+
+  @JsonAnyGetter
+  public Map<String, String> getProperties() {
+    return properties;
+  }
 
 }
