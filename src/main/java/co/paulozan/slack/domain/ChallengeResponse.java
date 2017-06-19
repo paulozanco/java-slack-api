@@ -38,6 +38,6 @@ import lombok.Data;
 @JsonInclude(Include.NON_NULL)
 public class ChallengeResponse {
 
-  private String challenge;
+  private final String challenge;
 
 }
