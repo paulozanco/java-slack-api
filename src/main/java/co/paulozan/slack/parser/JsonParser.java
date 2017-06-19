@@ -17,31 +17,31 @@
  *
  */
 
-package co.paulozan.slack.event;
+package co.paulozan.slack.parser;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Created by pzanco on 17/06/17.
+ * Created by pzanco on 18/06/17.
  */
+public class JsonParser {
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import lombok.Data;
+  private static Logger logger = LoggerFactory.getLogger(JsonParser.class);
 
-/*
-{
-    "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
-    "challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P",
-    "type": "url_verification"
-}
- */
+  public static ObjectMapper mapper = new ObjectMapper();
 
-
-@Data
-@JsonInclude(Include.NON_NULL)
-public class Challenge {
-
-  private String token;
-  private String challenge;
-  private String type;
+  public static Optional<Object> readValue(String json, Class valueType) {
+    try {
+      logger.debug("Received json string to parser [{}] of type {}",json,valueType);
+      Object object = mapper.readValue(json, valueType);
+      return Optional.fromNullable(object);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      return Optional.fromNullable(null);
+    }
+  }
 
 }

@@ -17,31 +17,27 @@
  *
  */
 
-package co.paulozan.slack.event;
+package co.paulozan.slack.domain;
 
 /**
  * Created by pzanco on 17/06/17.
  */
 
+import co.paulozan.slack.event.Message;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Data;
 
 /*
-{
-    "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
-    "challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P",
-    "type": "url_verification"
-}
- */
-
-
+ Response
+  {
+    "challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"
+  }
+*/
 @Data
 @JsonInclude(Include.NON_NULL)
-public class Handshake {
+public class ChallengeResponse {
 
-  private String token;
   private String challenge;
-  private String type;
 
 }
