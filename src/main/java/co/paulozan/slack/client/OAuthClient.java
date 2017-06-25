@@ -17,25 +17,25 @@
  *
  */
 
-package co.paulozan.slack;
+package co.paulozan.slack.client;
 
-import co.paulozan.slack.contract.API;
-import co.paulozan.slack.domain.HealthCheck;
+import co.paulozan.slack.contract.OAuth;
+import co.paulozan.slack.domain.Authentication;
+import co.paulozan.slack.domain.AuthenticationResponse;
 import rx.Observable;
 
 /**
  * Created by pzanco on 15/06/17.
  */
-public final class APIService {
+public final class OAuthClient {
 
-  private static final API api = (API) Builder.instance(API.class);
+  private static final OAuth oAuth = (OAuth) Builder.instance(OAuth.class);
 
-  private APIService() {
+  private OAuthClient() {
   }
 
-  public static HealthCheck test() throws Exception {
-    Observable<HealthCheck> observable = api.test().toObservable();
+  public static AuthenticationResponse access(Authentication authentication) throws Exception {
+    Observable<AuthenticationResponse> observable = oAuth.access(authentication).toObservable();
     return observable.toBlocking().single();
   }
-
 }

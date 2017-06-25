@@ -17,25 +17,32 @@
  *
  */
 
-import co.paulozan.slack.client.OAuthClient;
-import co.paulozan.slack.contract.OAuth;
-import co.paulozan.slack.domain.Authentication;
-import co.paulozan.slack.domain.AuthenticationResponse;
+package co.paulozan.slack.domain;
 
-public class App {
+/**
+ * Created by pzanco on 17/06/17.
+ */
 
-  public static void main(String[] args) {
-    try {
-      Authentication authentication = new Authentication();
-      authentication.setClientId("");
-      authentication.setClientSecret("");
-      authentication.setCode("");
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-      AuthenticationResponse authenticationResponse = OAuthClient.access(authentication);
-      System.out.println("args = [" + authenticationResponse + "]");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+/*
+  Response
+  {
+      "access_token": "xoxp-23984754863-2348975623103",
+      "scope": "read"
   }
+*/
+@Data
+@JsonInclude(Include.NON_NULL)
+public class AuthenticationResponse {
+
+  private Boolean ok;
+  private String error;
+  @JsonProperty("access_token")
+  private String accessToken;
+  private String scope;
 
 }

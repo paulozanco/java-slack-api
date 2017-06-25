@@ -19,11 +19,17 @@
 
 package co.paulozan.slack.contract;
 
-/**
- * Created by pzanco on 15/06/17.
- */
-public class SlackConstants {
+import co.paulozan.slack.domain.Authentication;
+import co.paulozan.slack.domain.AuthenticationResponse;
+import com.netflix.hystrix.HystrixCommand;
+import feign.RequestLine;
 
-  public static final String SLACK_URL = "https://slack.com";
+/**
+ * Created by pzanco on 11/06/17.
+ */
+public interface OAuth {
+
+  @RequestLine("POST /api/oauth.access")
+  HystrixCommand<AuthenticationResponse> access(Authentication authentication);
 
 }

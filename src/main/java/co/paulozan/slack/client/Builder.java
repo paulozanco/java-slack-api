@@ -17,27 +17,26 @@
  *
  */
 
-package co.paulozan.slack;
+package co.paulozan.slack.client;
 
-import co.paulozan.slack.domain.ChatResponse;
-import rx.Observable;
+import feign.Logger.Level;
+import feign.hystrix.HystrixFeign;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
+import feign.slf4j.Slf4jLogger;
 
 /**
  * Created by pzanco on 15/06/17.
  */
-public final class ChatService {
+public class Builder {
 
-  private static final co.paulozan.slack.contract.Chat chat = (co.paulozan.slack.contract.Chat) Builder
-      .instance(
-          co.paulozan.slack.contract.Chat.class);
-
-  private ChatService() {
-  }
-
-  public static ChatResponse postMessage(String token, String channel, String text)
-      throws Exception {
-    Observable<ChatResponse> observable = chat.postMessage(token, channel, text).toObservable();
-    return observable.toBlocking().single();
+  public static Object instance(Class t) {
+    return HystrixFeign.builder()
+        .logger(new Slf4jLogger())
+        .logLevel(Level.FULL)
+        .encoder(new JacksonEncoder())
+        .decoder(new JacksonDecoder())
+        .target(t, SlackConstants.SLACK_URL);
   }
 
 }

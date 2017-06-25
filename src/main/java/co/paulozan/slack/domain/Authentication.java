@@ -17,25 +17,26 @@
  *
  */
 
-import co.paulozan.slack.client.OAuthClient;
-import co.paulozan.slack.contract.OAuth;
-import co.paulozan.slack.domain.Authentication;
-import co.paulozan.slack.domain.AuthenticationResponse;
+package co.paulozan.slack.domain;
 
-public class App {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-  public static void main(String[] args) {
-    try {
-      Authentication authentication = new Authentication();
-      authentication.setClientId("");
-      authentication.setClientSecret("");
-      authentication.setCode("");
+/**
+ * Created by pzanco on 18/06/17.
+ */
+@Data
+@JsonInclude(Include.NON_NULL)
+public class Authentication {
 
-      AuthenticationResponse authenticationResponse = OAuthClient.access(authentication);
-      System.out.println("args = [" + authenticationResponse + "]");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+  @JsonProperty("client_id")
+  private String clientId;
+  @JsonProperty("client_secret")
+  private String clientSecret;
+  private String code;
+  @JsonProperty("redirect_uri")
+  private String redirectUri;
 
 }

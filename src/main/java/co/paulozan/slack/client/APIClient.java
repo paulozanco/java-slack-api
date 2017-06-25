@@ -17,27 +17,25 @@
  *
  */
 
-package co.paulozan.slack.domain;
+package co.paulozan.slack.client;
+
+import co.paulozan.slack.contract.API;
+import co.paulozan.slack.domain.HealthCheck;
+import rx.Observable;
 
 /**
- * Created by pzanco on 17/06/17.
+ * Created by pzanco on 15/06/17.
  */
+public final class APIClient {
 
-import co.paulozan.slack.event.Message;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import lombok.Data;
+  private static final API api = (API) Builder.instance(API.class);
 
-/*
- Response
-  {
-    "challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"
+  private APIClient() {
   }
-*/
-@Data
-@JsonInclude(Include.NON_NULL)
-public class ChallengeResponse {
 
-  private final String challenge;
+  public static HealthCheck test() throws Exception {
+    Observable<HealthCheck> observable = api.test().toObservable();
+    return observable.toBlocking().single();
+  }
 
 }

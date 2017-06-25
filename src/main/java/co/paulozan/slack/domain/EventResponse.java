@@ -17,25 +17,27 @@
  *
  */
 
-package co.paulozan.slack;
-
-import co.paulozan.slack.contract.SlackConstants;
-import feign.Logger.Level;
-import feign.hystrix.HystrixFeign;
-import feign.jackson.JacksonDecoder;
-import feign.slf4j.Slf4jLogger;
+package co.paulozan.slack.domain;
 
 /**
- * Created by pzanco on 15/06/17.
+ * Created by pzanco on 17/06/17.
  */
-public class Builder {
 
-  public static Object instance(Class t) {
-    return HystrixFeign.builder()
-        .logger(new Slf4jLogger())
-        .logLevel(Level.FULL)
-        .decoder(new JacksonDecoder())
-        .target(t, SlackConstants.SLACK_URL);
+import co.paulozan.slack.event.Message;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import lombok.Data;
+
+/*
+ Response
+  {
+    "challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"
   }
+*/
+@Data
+@JsonInclude(Include.NON_NULL)
+public class EventResponse {
+
+  private String challenge;
 
 }

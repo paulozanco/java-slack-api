@@ -17,7 +17,7 @@
  *
  */
 
-package co.paulozan.slack;
+package co.paulozan.slack.client;
 
 import co.paulozan.slack.contract.Auth;
 import co.paulozan.slack.domain.AuthenticationCheck;
@@ -26,11 +26,11 @@ import rx.Observable;
 /**
  * Created by pzanco on 15/06/17.
  */
-public final class AuthService {
+public final class AuthClient {
 
   private static final Auth auth = (Auth) Builder.instance(Auth.class);
 
-  private AuthService() {
+  private AuthClient() {
   }
 
   public static AuthenticationCheck test(String token) throws Exception {

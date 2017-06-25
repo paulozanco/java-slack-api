@@ -19,8 +19,10 @@
 
 package co.paulozan.slack.parser;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Optional;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,15 +35,18 @@ public class JsonParser {
 
   public static ObjectMapper mapper = new ObjectMapper();
 
-  public static Optional<Object> readValue(String json, Class valueType) {
-    try {
-      logger.debug("Received json string to parser [{}] of type {}",json,valueType);
-      Object object = mapper.readValue(json, valueType);
-      return Optional.fromNullable(object);
-    } catch (Exception e) {
-      logger.error(e.getMessage());
-      return Optional.fromNullable(null);
-    }
+  public static Optional<Object> toObject(String json, Class valueType) throws Exception{
+      Optional<Object> object = Optional.fromNullable(mapper.readValue(json, valueType));
+      return object;
   }
 
+  public static Optional<String> toJson(Object object) throws Exception{
+      Optional<String> json = Optional.fromNullable(mapper.writeValueAsString(object));
+      return json;
+  }
+
+  public static Map<String, Object> toMap(Object object) throws Exception{
+    Map map = mapper.convertValue(object, new TypeReference<Map<String, Object>>(){});
+    return map;
+  }
 }

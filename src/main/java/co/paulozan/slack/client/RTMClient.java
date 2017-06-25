@@ -17,25 +17,25 @@
  *
  */
 
-import co.paulozan.slack.client.OAuthClient;
-import co.paulozan.slack.contract.OAuth;
-import co.paulozan.slack.domain.Authentication;
-import co.paulozan.slack.domain.AuthenticationResponse;
+package co.paulozan.slack.client;
 
-public class App {
+import co.paulozan.slack.contract.RTM;
+import co.paulozan.slack.domain.RTMResponse;
+import rx.Observable;
 
-  public static void main(String[] args) {
-    try {
-      Authentication authentication = new Authentication();
-      authentication.setClientId("");
-      authentication.setClientSecret("");
-      authentication.setCode("");
+/**
+ * Created by pzanco on 15/06/17.
+ */
+public final class RTMClient {
 
-      AuthenticationResponse authenticationResponse = OAuthClient.access(authentication);
-      System.out.println("args = [" + authenticationResponse + "]");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  private static final RTM rtm = (RTM) Builder.instance(RTM.class);
+
+  private RTMClient() {
+  }
+
+  public static RTMResponse connect(String token) throws Exception {
+    Observable<RTMResponse> observable = rtm.connect(token).toObservable();
+    return observable.toBlocking().single();
   }
 
 }
