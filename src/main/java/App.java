@@ -17,6 +17,7 @@
  *
  */
 
+import co.paulozan.slack.client.ChatClient;
 import co.paulozan.slack.client.OAuthClient;
 import co.paulozan.slack.contract.OAuth;
 import co.paulozan.slack.domain.Authentication;
@@ -26,16 +27,19 @@ public class App {
 
   public static void main(String[] args) {
     try {
-      Authentication authentication = new Authentication();
-      authentication.setClientId("");
-      authentication.setClientSecret("");
-      authentication.setCode("");
-
-      AuthenticationResponse authenticationResponse = OAuthClient.access(authentication);
-      System.out.println("args = [" + authenticationResponse + "]");
+      App.postMessage();
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+
+  private static void postMessage() throws Exception{
+    String token = System.getenv("SLACK_TOKEN");
+    String channel = "#general";
+    String text = "Hello World";
+
+    ChatClient.postMessage(token, channel, text);
   }
 
 }
