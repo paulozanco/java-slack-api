@@ -23,6 +23,7 @@ package co.paulozan.slack.domain;
  * Created by pzanco on 17/06/17.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -37,6 +38,7 @@ import lombok.Data;
 */
 @Data
 @JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthenticationResponse {
 
   private Boolean ok;

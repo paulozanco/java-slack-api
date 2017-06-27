@@ -17,30 +17,28 @@
  *
  */
 
-package co.paulozan.slack.domain;
+package co.paulozan.slack.client;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import java.util.Map;
-import lombok.Data;
+import co.paulozan.slack.contract.Channels;
+import co.paulozan.slack.domain.ChannelsRequest;
+import co.paulozan.slack.domain.ChannelsResponse;
+import rx.Observable;
 
 /**
- * Created by pzanco on 18/06/17.
+ * Created by pzanco on 15/06/17.
  */
-@Data
-@JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonRootName(value = "icons")
-public class Icons {
+public final class ChannelsClient {
 
-  private Map<String, String> properties;
+  private static final Channels channels = (Channels) Builder.instance(Channels.class);
 
-  @JsonAnyGetter
-  public Map<String, String> getProperties() {
-    return properties;
+  private ChannelsClient() {
   }
+
+  public static ChannelsResponse history(String token, String channel) throws Exception {
+    ChannelsRequest.History param = new ChannelsRequest().new History(token, channel);
+    Observable<ChannelsResponse> observable = channels.history(param.toMap()).toObservable();
+    return observable.toBlocking().single();
+  }
+
 
 }

@@ -17,26 +17,55 @@
  *
  */
 
+import co.paulozan.slack.client.ChannelsClient;
 import co.paulozan.slack.client.ChatClient;
 import co.paulozan.slack.client.OAuthClient;
 import co.paulozan.slack.contract.OAuth;
 import co.paulozan.slack.domain.Authentication;
 import co.paulozan.slack.domain.AuthenticationResponse;
+import co.paulozan.slack.domain.ChannelsResponse;
 
 public class App {
 
   public static void main(String[] args) {
     try {
-      App.postMessage();
+
+      ChannelsResponse response = App.channelsHistory();
+      response.getMessages().forEach(message -> {
+        try {
+          System.out.println(message);
+          if (message.getChannel() != null) {
+            App.chatClientDeleteMessage(message.getChannel(), message.getTs());
+          }
+        }catch(Exception e){
+          e.printStackTrace();
+          System.exit(1);
+      }
+      });
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
 
-  private static void postMessage() throws Exception{
+  private static ChannelsResponse channelsHistory() throws Exception{
+    String token = System.getenv("SLACK_USER_TOKEN");
+    String channel = "C5SMF2FSB";
+
+    ChannelsResponse response = ChannelsClient.history(token, channel);
+    return response;
+  }
+
+
+  private static void chatClientDeleteMessage(String channel, String ts) throws Exception{
     String token = System.getenv("SLACK_TOKEN");
-    String channel = "#general";
+    ChatClient.delete(token, channel, ts);
+  }
+
+
+  private static void chatClientPostMessage() throws Exception{
+    String token = System.getenv("SLACK_TOKEN");
+    String channel = "C5SMF2FSB";
     String text = "Hello World";
 
     ChatClient.postMessage(token, channel, text);

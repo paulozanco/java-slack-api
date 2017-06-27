@@ -22,6 +22,7 @@ package co.paulozan.slack.contract;
 import co.paulozan.slack.domain.Authentication;
 import co.paulozan.slack.domain.AuthenticationResponse;
 import com.netflix.hystrix.HystrixCommand;
+import feign.Headers;
 import feign.RequestLine;
 
 /**
@@ -30,6 +31,7 @@ import feign.RequestLine;
 public interface OAuth {
 
   @RequestLine("POST /api/oauth.access")
+  @Headers("Content-Type: application/json")
   HystrixCommand<AuthenticationResponse> access(Authentication authentication);
 
 }

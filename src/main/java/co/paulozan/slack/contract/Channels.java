@@ -17,30 +17,22 @@
  *
  */
 
-package co.paulozan.slack.domain;
+package co.paulozan.slack.contract;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import co.paulozan.slack.domain.ChannelsRequest;
+import co.paulozan.slack.domain.ChannelsResponse;
+import com.netflix.hystrix.HystrixCommand;
+import feign.Headers;
+import feign.QueryMap;
+import feign.RequestLine;
 import java.util.Map;
-import lombok.Data;
 
 /**
- * Created by pzanco on 18/06/17.
+ * Created by pzanco on 11/06/17.
  */
-@Data
-@JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonRootName(value = "icons")
-public class Icons {
+public interface Channels {
 
-  private Map<String, String> properties;
-
-  @JsonAnyGetter
-  public Map<String, String> getProperties() {
-    return properties;
-  }
+  @RequestLine("POST /api/channels.history")
+  HystrixCommand<ChannelsResponse> history(@QueryMap Map<String,Object> param);
 
 }

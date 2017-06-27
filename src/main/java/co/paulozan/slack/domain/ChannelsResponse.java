@@ -26,27 +26,59 @@ package co.paulozan.slack.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import lombok.Data;
 
 /*
- Response
- {
+{
     "ok": true,
-    "ts": "1405895017.000506",
-    "channel": "C024BE91L",
-    "message": {
-                 ...
-               }
- }
+    "latest": "1358547726.000003",
+    "messages": [
+        {
+            "type": "message",
+            "ts": "1358546515.000008",
+            "user": "U2147483896",
+            "text": "Hello"
+        },
+        {
+            "type": "message",
+            "ts": "1358546515.000007",
+            "user": "U2147483896",
+            "text": "World",
+            "is_starred": true,
+            "reactions": [
+                {
+                    "name": "space_invader",
+                    "count": 3,
+                    "users": [ "U1", "U2", "U3" ]
+                },
+                {
+                    "name": "sweet_potato",
+                    "count": 5,
+                    "users": [ "U1", "U2", "U3", "U4", "U5" ]
+                }
+            ]
+                    },
+        {
+            "type": "something_else",
+            "ts": "1358546515.000007",
+            "wibblr": true
+        }
+    ],
+    "has_more": false
+}
 */
+
 @Data
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ChatResponse {
+public class ChannelsResponse {
 
   private Boolean ok;
-  private String ts;
-  private String channel;
-  private Message message;
+  private String error;
+  private List<Message> messages;
+  @JsonProperty("has_more")
+  private Boolean hasMore;
 
 }

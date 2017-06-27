@@ -19,19 +19,25 @@
 
 package co.paulozan.slack.contract;
 
+import co.paulozan.slack.domain.ChatRequest;
 import co.paulozan.slack.domain.ChatResponse;
 import com.netflix.hystrix.HystrixCommand;
+import feign.Headers;
 import feign.Param;
+import feign.QueryMap;
 import feign.RequestLine;
+import java.util.Map;
 
 /**
  * Created by pzanco on 11/06/17.
  */
 public interface Chat {
 
-  @RequestLine("POST /api/chat.postMessage?token={token}&channel={channel}&text={text}")
-  HystrixCommand<ChatResponse> postMessage(@Param("token") String token
-      , @Param("channel") String channel
-      , @Param("text") String text);
+  @RequestLine("POST /api/chat.postMessage")
+  HystrixCommand<ChatResponse> postMessage(@QueryMap Map<String,Object> param);
+
+  @RequestLine("POST /api/chat.delete")
+  HystrixCommand<ChatResponse> delete(@QueryMap Map<String,Object> param);
+
 
 }

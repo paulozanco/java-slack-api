@@ -19,6 +19,8 @@
 
 package co.paulozan.slack.client;
 
+import co.paulozan.slack.contract.Chat;
+import co.paulozan.slack.domain.ChatRequest;
 import co.paulozan.slack.domain.ChatResponse;
 import rx.Observable;
 
@@ -27,16 +29,24 @@ import rx.Observable;
  */
 public final class ChatClient {
 
-  private static final co.paulozan.slack.contract.Chat chat = (co.paulozan.slack.contract.Chat) Builder
-      .instance(
-          co.paulozan.slack.contract.Chat.class);
+  private static final Chat chat = (Chat) Builder.instance(Chat.class);
 
   private ChatClient() {
   }
 
-  public static ChatResponse postMessage(String token, String channel, String text)
-      throws Exception {
-    Observable<ChatResponse> observable = chat.postMessage(token, channel, text).toObservable();
+  public static ChatResponse postMessage(String token,
+      String channel,
+      String text) throws Exception {
+    ChatRequest.PostMessage param = new ChatRequest().new PostMessage(token, channel, text);
+    Observable<ChatResponse> observable = chat.postMessage(param.toMap()).toObservable();
+    return observable.toBlocking().single();
+  }
+
+  public static ChatResponse delete(String token,
+      String channel,
+      String ts) throws Exception {
+    ChatRequest.DeleteMessage param = new ChatRequest().new DeleteMessage(token, channel, ts);
+    Observable<ChatResponse> observable = chat.postMessage(param.toMap()).toObservable();
     return observable.toBlocking().single();
   }
 
