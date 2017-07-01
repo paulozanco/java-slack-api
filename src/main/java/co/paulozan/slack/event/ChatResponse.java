@@ -17,22 +17,33 @@
  *
  */
 
-package co.paulozan.slack.client;
+package co.paulozan.slack.event;
 
-import co.paulozan.slack.contract.OAuth;
-import co.paulozan.slack.domain.Authentication;
-import co.paulozan.slack.event.AuthenticationResponse;
-import rx.Observable;
+import co.paulozan.slack.domain.Message;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import lombok.Data;
 
-public final class OAuthClient {
+/*
+ Response
+ {
+    "ok": true,
+    "ts": "1405895017.000506",
+    "channel": "C024BE91L",
+    "message": {
+                 ...
+               }
+ }
+*/
+@Data
+@JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ChatResponse {
 
-  private static final OAuth oAuth = (OAuth) Builder.instance(OAuth.class);
+  private Boolean ok;
+  private String ts;
+  private String channel;
+  private Message message;
 
-  private OAuthClient() {
-  }
-
-  public static AuthenticationResponse access(Authentication authentication) throws Exception {
-    Observable<AuthenticationResponse> observable = oAuth.access(authentication).toObservable();
-    return observable.toBlocking().single();
-  }
 }

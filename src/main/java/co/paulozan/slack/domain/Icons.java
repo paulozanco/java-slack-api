@@ -27,9 +27,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import java.util.Map;
 import lombok.Data;
 
-/**
- * Created by pzanco on 18/06/17.
- */
 @Data
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -24,9 +24,6 @@ import com.netflix.hystrix.HystrixCommand;
 import feign.Param;
 import feign.RequestLine;
 
-/**
- * Created by pzanco on 11/06/17.
- */
 public interface Auth {
 
   @RequestLine("POST /api/auth.test?token={token}")

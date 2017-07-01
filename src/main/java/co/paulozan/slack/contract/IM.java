@@ -17,36 +17,17 @@
  *
  */
 
-package co.paulozan.slack.domain;
+package co.paulozan.slack.contract;
 
-/**
- * Created by pzanco on 17/06/17.
- */
+import co.paulozan.slack.event.IMResponse;
+import com.netflix.hystrix.HystrixCommand;
+import feign.QueryMap;
+import feign.RequestLine;
+import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import lombok.Data;
+public interface IM {
 
-/*
- Response
- {
-    "ok": true,
-    "ts": "1405895017.000506",
-    "channel": "C024BE91L",
-    "message": {
-                 ...
-               }
- }
-*/
-@Data
-@JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class ChatResponse {
-
-  private Boolean ok;
-  private String ts;
-  private String channel;
-  private Message message;
+  @RequestLine("POST /api/im.history")
+  HystrixCommand<IMResponse> history(@QueryMap Map<String, Object> param);
 
 }

@@ -23,9 +23,6 @@ import co.paulozan.slack.domain.HealthCheck;
 import com.netflix.hystrix.HystrixCommand;
 import feign.RequestLine;
 
-/**
- * Created by pzanco on 11/06/17.
- */
 public interface API {
 
   /**

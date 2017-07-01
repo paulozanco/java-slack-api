@@ -25,9 +25,6 @@ import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
 
-/**
- * Created by pzanco on 15/06/17.
- */
 public class Builder {
 
   public static Object instance(Class t) {

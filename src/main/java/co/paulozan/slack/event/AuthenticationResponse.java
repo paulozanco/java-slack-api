@@ -17,22 +17,30 @@
  *
  */
 
-package co.paulozan.slack.client;
+package co.paulozan.slack.event;
 
-import co.paulozan.slack.contract.OAuth;
-import co.paulozan.slack.domain.Authentication;
-import co.paulozan.slack.event.AuthenticationResponse;
-import rx.Observable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
-public final class OAuthClient {
-
-  private static final OAuth oAuth = (OAuth) Builder.instance(OAuth.class);
-
-  private OAuthClient() {
+/*
+  Response
+  {
+      "access_token": "xoxp-23984754863-2348975623103",
+      "scope": "read"
   }
+*/
+@Data
+@JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AuthenticationResponse {
 
-  public static AuthenticationResponse access(Authentication authentication) throws Exception {
-    Observable<AuthenticationResponse> observable = oAuth.access(authentication).toObservable();
-    return observable.toBlocking().single();
-  }
+  private Boolean ok;
+  private String error;
+  @JsonProperty("access_token")
+  private String accessToken;
+  private String scope;
+
 }

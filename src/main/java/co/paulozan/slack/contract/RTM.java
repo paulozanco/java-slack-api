@@ -19,14 +19,11 @@
 
 package co.paulozan.slack.contract;
 
-import co.paulozan.slack.domain.RTMResponse;
+import co.paulozan.slack.event.RTMResponse;
 import com.netflix.hystrix.HystrixCommand;
 import feign.Param;
 import feign.RequestLine;
 
-/**
- * Created by pzanco on 11/06/17.
- */
 public interface RTM {
 
   @RequestLine("POST /api/rtm.connect?token={token}")

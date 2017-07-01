@@ -19,18 +19,12 @@
 
 package co.paulozan.slack.contract;
 
-import co.paulozan.slack.domain.ChatRequest;
-import co.paulozan.slack.domain.ChatResponse;
+import co.paulozan.slack.event.ChatResponse;
 import com.netflix.hystrix.HystrixCommand;
-import feign.Headers;
-import feign.Param;
 import feign.QueryMap;
 import feign.RequestLine;
 import java.util.Map;
 
-/**
- * Created by pzanco on 11/06/17.
- */
 public interface Chat {
 
   @RequestLine("POST /api/chat.postMessage")

@@ -26,9 +26,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by pzanco on 18/06/17.
- */
 public class JsonParser {
 
   private static Logger logger = LoggerFactory.getLogger(JsonParser.class);

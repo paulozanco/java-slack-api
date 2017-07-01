@@ -19,17 +19,12 @@
 
 package co.paulozan.slack.contract;
 
-import co.paulozan.slack.domain.ChannelsRequest;
-import co.paulozan.slack.domain.ChannelsResponse;
+import co.paulozan.slack.event.ChannelsResponse;
 import com.netflix.hystrix.HystrixCommand;
-import feign.Headers;
 import feign.QueryMap;
 import feign.RequestLine;
 import java.util.Map;
 
-/**
- * Created by pzanco on 11/06/17.
- */
 public interface Channels {
 
   @RequestLine("POST /api/channels.history")

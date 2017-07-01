@@ -23,9 +23,6 @@ import co.paulozan.slack.contract.API;
 import co.paulozan.slack.domain.HealthCheck;
 import rx.Observable;
 
-/**
- * Created by pzanco on 15/06/17.
- */
 public final class APIClient {
 
   private static final API api = (API) Builder.instance(API.class);

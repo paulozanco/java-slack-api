@@ -20,12 +20,9 @@
 package co.paulozan.slack.client;
 
 import co.paulozan.slack.contract.RTM;
-import co.paulozan.slack.domain.RTMResponse;
+import co.paulozan.slack.event.RTMResponse;
 import rx.Observable;
 
-/**
- * Created by pzanco on 15/06/17.
- */
 public final class RTMClient {
 
   private static final RTM rtm = (RTM) Builder.instance(RTM.class);

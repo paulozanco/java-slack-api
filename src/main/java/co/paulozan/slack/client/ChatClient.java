@@ -20,13 +20,10 @@
 package co.paulozan.slack.client;
 
 import co.paulozan.slack.contract.Chat;
-import co.paulozan.slack.domain.ChatRequest;
-import co.paulozan.slack.domain.ChatResponse;
+import co.paulozan.slack.event.ChatRequest;
+import co.paulozan.slack.event.ChatResponse;
 import rx.Observable;
 
-/**
- * Created by pzanco on 15/06/17.
- */
 public final class ChatClient {
 
   private static final Chat chat = (Chat) Builder.instance(Chat.class);
@@ -37,7 +34,8 @@ public final class ChatClient {
   public static ChatResponse postMessage(String token,
       String channel,
       String text) throws Exception {
-    ChatRequest.PostMessage param = new ChatRequest().new PostMessage(token, channel, text);
+    ChatRequest.PostMessage param = ChatRequest.PostMessage.builder().token(token).channel(channel)
+        .text(text).build();
     Observable<ChatResponse> observable = chat.postMessage(param.toMap()).toObservable();
     return observable.toBlocking().single();
   }
@@ -45,8 +43,9 @@ public final class ChatClient {
   public static ChatResponse delete(String token,
       String channel,
       String ts) throws Exception {
-    ChatRequest.DeleteMessage param = new ChatRequest().new DeleteMessage(token, channel, ts);
-    Observable<ChatResponse> observable = chat.postMessage(param.toMap()).toObservable();
+    ChatRequest.DeleteMessage param = ChatRequest.DeleteMessage.builder().token(token)
+        .channel(channel).ts(ts).build();
+    Observable<ChatResponse> observable = chat.delete(param.toMap()).toObservable();
     return observable.toBlocking().single();
   }
 

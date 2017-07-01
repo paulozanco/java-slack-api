@@ -19,28 +19,24 @@
 
 import co.paulozan.slack.client.ChannelsClient;
 import co.paulozan.slack.client.ChatClient;
-import co.paulozan.slack.client.OAuthClient;
-import co.paulozan.slack.contract.OAuth;
-import co.paulozan.slack.domain.Authentication;
-import co.paulozan.slack.domain.AuthenticationResponse;
-import co.paulozan.slack.domain.ChannelsResponse;
+import co.paulozan.slack.client.IMClient;
+import co.paulozan.slack.event.ChannelsResponse;
+import co.paulozan.slack.event.IMResponse;
 
 public class App {
 
   public static void main(String[] args) {
     try {
 
-      ChannelsResponse response = App.channelsHistory();
+      IMResponse response = App.imClientHistory();
       response.getMessages().forEach(message -> {
         try {
           System.out.println(message);
-          if (message.getChannel() != null) {
-            App.chatClientDeleteMessage(message.getChannel(), message.getTs());
-          }
-        }catch(Exception e){
+          App.chatClientDeleteMessage("D5Z5NM7GS", message.getTs());
+        } catch (Exception e) {
           e.printStackTrace();
           System.exit(1);
-      }
+        }
       });
     } catch (Exception e) {
       e.printStackTrace();
@@ -48,27 +44,33 @@ public class App {
   }
 
 
-  private static ChannelsResponse channelsHistory() throws Exception{
+  private static ChannelsResponse channelsClientHistory() throws Exception {
     String token = System.getenv("SLACK_USER_TOKEN");
     String channel = "C5SMF2FSB";
 
-    ChannelsResponse response = ChannelsClient.history(token, channel);
-    return response;
+    return ChannelsClient.history(token, channel);
   }
 
 
-  private static void chatClientDeleteMessage(String channel, String ts) throws Exception{
+  private static void chatClientDeleteMessage(String channel, String ts) throws Exception {
     String token = System.getenv("SLACK_TOKEN");
     ChatClient.delete(token, channel, ts);
   }
 
 
-  private static void chatClientPostMessage() throws Exception{
+  private static void chatClientPostMessage() throws Exception {
     String token = System.getenv("SLACK_TOKEN");
     String channel = "C5SMF2FSB";
     String text = "Hello World";
 
     ChatClient.postMessage(token, channel, text);
+  }
+
+  private static IMResponse imClientHistory() throws Exception {
+    String token = System.getenv("SLACK_TOKEN");
+    String channel = "D5Z5NM7GS";
+
+    return IMClient.history(token, channel);
   }
 
 }

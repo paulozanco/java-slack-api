@@ -1,40 +1,38 @@
-package co.paulozan.slack.domain;
+package co.paulozan.slack.event;
 
 import co.paulozan.slack.parser.JsonParser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.Map;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Value;
 
-/**
- * Created by pzanco on 26/06/17.
- */
+@Builder
 @Data
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ChatRequest {
 
-  @Data
-  @JsonInclude(Include.NON_NULL)
-  @JsonIgnoreProperties(ignoreUnknown = true)
-  public class PostMessage{
-    private final String token;
-    private final String channel;
-    private final String text;
+  @Builder
+  @Value
+  public static class PostMessage{
+    String token;
+    String channel;
+    String text;
 
     public Map<String,Object> toMap() throws Exception{
       return JsonParser.toMap(this);
     }
   }
 
-  @Data
-  @JsonInclude(Include.NON_NULL)
-  @JsonIgnoreProperties(ignoreUnknown = true)
-  public class DeleteMessage{
-    private final String token;
-    private final String channel;
-    private final String ts;
+  @Builder
+  @Value
+  public static class DeleteMessage{
+    String token;
+    String channel;
+    String ts;
 
     public Map<String,Object> toMap() throws Exception{
       return JsonParser.toMap(this);

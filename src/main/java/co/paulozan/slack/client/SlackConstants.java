@@ -19,9 +19,6 @@
 
 package co.paulozan.slack.client;
 
-/**
- * Created by pzanco on 15/06/17.
- */
 public class SlackConstants {
 
   public static final String SLACK_URL = "https://slack.com";

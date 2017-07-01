@@ -23,9 +23,6 @@ import co.paulozan.slack.contract.Auth;
 import co.paulozan.slack.domain.AuthenticationCheck;
 import rx.Observable;
 
-/**
- * Created by pzanco on 15/06/17.
- */
 public final class AuthClient {
 
   private static final Auth auth = (Auth) Builder.instance(Auth.class);

@@ -17,28 +17,24 @@
  *
  */
 
-package co.paulozan.slack.domain;
+package co.paulozan.slack.client;
 
-/**
- * Created by pzanco on 17/06/17.
- */
+import co.paulozan.slack.contract.IM;
+import co.paulozan.slack.event.IMRequest;
+import co.paulozan.slack.event.IMResponse;
+import rx.Observable;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import lombok.Data;
+public final class IMClient {
 
-/*
- Response
-  {
-    "challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"
+  private static final IM im = (IM) Builder.instance(IM.class);
+
+  private IMClient() {
   }
-*/
-@Data
-@JsonInclude(Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class EventResponse {
 
-  private String challenge;
-
+  public static IMResponse history(String token,
+      String channel) throws Exception {
+    IMRequest.History param = IMRequest.History.builder().token(token).channel(channel).build();
+    Observable<IMResponse> observable = im.history(param.toMap()).toObservable();
+    return observable.toBlocking().single();
+  }
 }

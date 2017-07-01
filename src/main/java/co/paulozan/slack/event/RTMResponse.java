@@ -17,12 +17,10 @@
  *
  */
 
-package co.paulozan.slack.domain;
+package co.paulozan.slack.event;
 
-/**
- * Created by pzanco on 17/06/17.
- */
-
+import co.paulozan.slack.domain.Self;
+import co.paulozan.slack.domain.Team;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

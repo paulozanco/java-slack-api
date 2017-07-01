@@ -20,14 +20,11 @@
 package co.paulozan.slack.contract;
 
 import co.paulozan.slack.domain.Authentication;
-import co.paulozan.slack.domain.AuthenticationResponse;
+import co.paulozan.slack.event.AuthenticationResponse;
 import com.netflix.hystrix.HystrixCommand;
 import feign.Headers;
 import feign.RequestLine;
 
-/**
- * Created by pzanco on 11/06/17.
- */
 public interface OAuth {
 
   @RequestLine("POST /api/oauth.access")

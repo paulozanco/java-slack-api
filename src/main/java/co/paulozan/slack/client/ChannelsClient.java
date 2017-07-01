@@ -20,13 +20,10 @@
 package co.paulozan.slack.client;
 
 import co.paulozan.slack.contract.Channels;
-import co.paulozan.slack.domain.ChannelsRequest;
-import co.paulozan.slack.domain.ChannelsResponse;
+import co.paulozan.slack.event.ChannelsRequest;
+import co.paulozan.slack.event.ChannelsResponse;
 import rx.Observable;
 
-/**
- * Created by pzanco on 15/06/17.
- */
 public final class ChannelsClient {
 
   private static final Channels channels = (Channels) Builder.instance(Channels.class);
@@ -35,7 +32,8 @@ public final class ChannelsClient {
   }
 
   public static ChannelsResponse history(String token, String channel) throws Exception {
-    ChannelsRequest.History param = new ChannelsRequest().new History(token, channel);
+    ChannelsRequest.History param = ChannelsRequest.History.builder().token(token).channel(channel)
+        .build();
     Observable<ChannelsResponse> observable = channels.history(param.toMap()).toObservable();
     return observable.toBlocking().single();
   }
